@@ -88,7 +88,7 @@ function checkEnd(i, time) {
 // num - 时间
 // length - 补足长度
 function zero(num, length){              
-    return new Array(length - (num + "").length + 1).join("0") + str;             
+    return new Array(length - (num + "").length + 1).join("0") + num;             
 }
 
 // 警示
