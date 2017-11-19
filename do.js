@@ -20,12 +20,10 @@ function appendTimer(offset, addMin = 10) {
     timer_div.className = "timer";
     timer_div.id = `timer_${index}`;
     timer_div.innerHTML = `
-    <div id="" class="timer">
-        <span id="display_${index}">00 : 00 : 00</span>
-        <button id="begin_${index}" onclick="begin(${index}, ${offset})">开始</button>
-        <button id="stop_${index}" onclick="stop(${index})">停止</button>
-        <button id="stop_${index}" onclick="addTime(${index}, 60 * ${addMin})">加${addMin}分</button>
-    </div>
+    <span id="display_${index}">00 : 00 : 00</span>
+    <button id="begin_${index}" onclick="begin(${index}, ${offset})">开始</button>
+    <button id="stop_${index}" onclick="stop(${index})">停止</button>
+    <button id="stop_${index}" onclick="addTime(${index}, 60 * ${addMin})">加${addMin}分</button>
     `;
     document.getElementById('timer_list').appendChild(timer_div);
 }
