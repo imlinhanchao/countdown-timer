@@ -44,12 +44,13 @@ button, input[type=submit], input[type=button], input[type=reset] {
     background-color: #bd1d27;
     padding: 5px;
     margin-right: 5px;
-    width: 30px;
+    width: 45px;
     line-height: 30px;
-    height: 30px;
+    height: 45px;
     text-align: center;
     font-family: Verdana, Helvetica Neue;
     font-weight: bold;
+    border: 0;
 }
 
 .timer {
@@ -60,7 +61,15 @@ button, input[type=submit], input[type=button], input[type=reset] {
     outline:none;
 }
 
+.hide {
+    display: none;
+}
+
 #offset {
     width: 3em;
     text-align: center;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
 }

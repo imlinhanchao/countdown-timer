@@ -1,11 +1,11 @@
 var counters = []; // 开始时间戳
 var offsets = []; // 倒计时时间
 var timers = []; // js timer id
-
+var maxIndex = 0;
 // 初始化添加timer
 // count - 添加个数
 // offset - timer 倒计时秒数
-function init(count, offset = 15 * 60) {
+function init(count, offset = 5) {
     for (var i = 0; i < count; i++) {
         appendTimer(offset);
     }
@@ -15,18 +15,20 @@ function init(count, offset = 15 * 60) {
 // offset - 倒计时秒数/
 // addMin - 加时时间
 function appendTimer(offset, addMin = 10) {
-    var index = document.getElementsByClassName('timer').length;
+    var index = maxIndex++;
+    var number = document.getElementsByClassName("timer").length;
     var timer_div = document.createElement("div");
     timer_div.className = "timer";
     timer_div.id = `timer_${index}`;
     timer_div.innerHTML = `
-    <span class="number">${index+1}</span>
+    <button class="number" ondblclick="remove(${index})">${number+1}</button>
     <button class="icon-btn" id="begin_${index}" onclick="begin(${index}, ${offset})"><img src="img/play.png" /></button>
     <button class="icon-btn" id="stop_${index}" onclick="stop(${index})"><img src="img/stop.png" /></button>
-    <span class="display" id="display_${index}">${offset / 60}:00.000</span>
+    <span class="display" id="display_${index}">${zero(parseInt(offset / 60), 2)}:${zero(offset % 60, 2)}.000</span>
     <button class="icon-btn" id="add_${index}" onclick="addTime(${index}, 60 * ${addMin})" title="加${addMin}分">
         <img src="img/add.png" />
     </button>
+    <audio class="hide" id="music_${index}" src="img/warning.mp3" loop/>
     `;
     document.getElementById('timer_list').appendChild(timer_div);
     document.getElementById(`stop_${index}`).style.display = "none";
@@ -50,13 +52,13 @@ function begin(i, seconds) {
 // i - 要停止的Timer索引
 function stop(i) {
     warning(i, false);    
-    if (!timers[i]) return;
-    clearInterval(timers[i]);
     timers[i] = 0;
     counters[i] = (new Date()).valueOf();
     display(i);
     document.getElementById(`begin_${i}`).style.display = "";
     document.getElementById(`stop_${i}`).style.display = "none";
+    if (!timers[i]) return;
+    clearInterval(timers[i]);
 }
 
 // 加时
@@ -75,7 +77,8 @@ function display(i) {
     var leave = offsets[i] - (current - counters[i]); // 剩余时间
     var time = "00:00.000";
     if (leave <= 0) {
-        stop(i);
+        clearInterval(timers[i]);
+        timers[i] = 0;
     } else {
         var leaveTime = new Date(leave);
         time = `${zero(leaveTime.getMinutes(), 2)}:${zero(leaveTime.getSeconds(), 2)}.${zero(leaveTime.getMilliseconds(), 3)}`;
@@ -110,6 +113,24 @@ function warning(i, enable = true) {
         document.getElementById(`display_${i}`).style.color = "";        
         document.getElementById(`display_${i}`).style.fontWeight = "";        
     }
+    playmusic(i, enable);
+}
+
+function playmusic(i, play = true) {
+    if (play) {
+        document.getElementById(`music_${i}`).play()
+    } else {
+        document.getElementById(`music_${i}`).pause()        
+    }
+}
+
+function remove(i) {
+    var timer = document.getElementById(`timer_${i}`);
+    timer.parentNode.removeChild(timer);
+    var numbers = Array.from(document.getElementsByClassName("number"));
+    numbers.forEach(function(ele, index) {
+        ele.innerHTML = index + 1;
+    });
 }
 
 init(6);
