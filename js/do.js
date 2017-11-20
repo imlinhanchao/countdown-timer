@@ -5,7 +5,7 @@ var maxIndex = 0;
 // 初始化添加timer
 // count - 添加个数
 // offset - timer 倒计时秒数
-function init(count, offset = 5) {
+function init(count, offset = 15 * 60) {
     for (var i = 0; i < count; i++) {
         appendTimer(offset);
     }
@@ -51,14 +51,13 @@ function begin(i, seconds) {
 // 停止倒计时
 // i - 要停止的Timer索引
 function stop(i) {
+    if (timers[i]) clearInterval(timers[i]);
     warning(i, false);    
     timers[i] = 0;
     counters[i] = (new Date()).valueOf();
     display(i);
     document.getElementById(`begin_${i}`).style.display = "";
     document.getElementById(`stop_${i}`).style.display = "none";
-    if (!timers[i]) return;
-    clearInterval(timers[i]);
 }
 
 // 加时
