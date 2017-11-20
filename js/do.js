@@ -5,7 +5,7 @@ var maxIndex = 0;
 // 初始化添加timer
 // count - 添加个数
 // offset - timer 倒计时秒数
-function init(count, offset = 15 * 60) {
+function init(count, offset = 4 * 60) {
     for (var i = 0; i < count; i++) {
         appendTimer(offset);
     }
@@ -14,7 +14,7 @@ function init(count, offset = 15 * 60) {
 // 添加一个倒计时Timer 
 // offset - 倒计时秒数/
 // addMin - 加时时间
-function appendTimer(offset, addMin = 10) {
+function appendTimer(offset, addMin = 4) {
     var index = maxIndex++;
     var number = document.getElementsByClassName("timer").length;
     var timer_div = document.createElement("div");
