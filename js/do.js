@@ -20,12 +20,16 @@ function appendTimer(offset, addMin = 10) {
     timer_div.className = "timer";
     timer_div.id = `timer_${index}`;
     timer_div.innerHTML = `
-    <span id="display_${index}">00 : 00 : 00</span>
-    <button id="begin_${index}" onclick="begin(${index}, ${offset})">开始</button>
-    <button id="stop_${index}" onclick="stop(${index})">停止</button>
-    <button id="stop_${index}" onclick="addTime(${index}, 60 * ${addMin})">加${addMin}分</button>
+    <span class="number">${index+1}</span>
+    <button class="icon-btn" id="begin_${index}" onclick="begin(${index}, ${offset})"><img src="img/play.png" /></button>
+    <button class="icon-btn" id="stop_${index}" onclick="stop(${index})"><img src="img/stop.png" /></button>
+    <span class="display" id="display_${index}">${offset / 60}:00.000</span>
+    <button class="icon-btn" id="add_${index}" onclick="addTime(${index}, 60 * ${addMin})" title="加${addMin}分">
+        <img src="img/add.png" />
+    </button>
     `;
     document.getElementById('timer_list').appendChild(timer_div);
+    document.getElementById(`stop_${index}`).style.display = "none";
 }
 
 // 开始倒计时
@@ -38,6 +42,8 @@ function begin(i, seconds) {
     timers[i] = setInterval(function () {
         checkEnd(i, display(i));
     }, 10)
+    document.getElementById(`begin_${i}`).style.display = "none";    
+    document.getElementById(`stop_${i}`).style.display = "";    
 }
 
 // 停止倒计时
@@ -47,6 +53,10 @@ function stop(i) {
     if (!timers[i]) return;
     clearInterval(timers[i]);
     timers[i] = 0;
+    counters[i] = (new Date()).valueOf();
+    display(i);
+    document.getElementById(`begin_${i}`).style.display = "";
+    document.getElementById(`stop_${i}`).style.display = "none";
 }
 
 // 加时
@@ -63,12 +73,12 @@ function addTime(i, seconds) {
 function display(i) {
     var current = (new Date()).valueOf();
     var leave = offsets[i] - (current - counters[i]); // 剩余时间
-    var time = "00 : 00 : 00";
+    var time = "00:00.000";
     if (leave <= 0) {
         stop(i);
     } else {
         var leaveTime = new Date(leave);
-        time = `${zero(leaveTime.getMinutes(), 2)} : ${zero(leaveTime.getSeconds(), 2)} : ${zero(leaveTime.getMilliseconds(), 3)}`;
+        time = `${zero(leaveTime.getMinutes(), 2)}:${zero(leaveTime.getSeconds(), 2)}.${zero(leaveTime.getMilliseconds(), 3)}`;
     }
     document.getElementById(`display_${i}`).innerHTML = time;
     return leave;
@@ -94,9 +104,11 @@ function zero(num, length){
 // enable - 开启警示与否
 function warning(i, enable = true) {
     if (enable) {
-        document.getElementById(`timer_${i}`).style.backgroundColor = "red";
+        document.getElementById(`display_${i}`).style.color = "red";
+        document.getElementById(`display_${i}`).style.fontWeight = "bold";
     } else {
-        document.getElementById(`timer_${i}`).style.backgroundColor = "";        
+        document.getElementById(`display_${i}`).style.color = "";        
+        document.getElementById(`display_${i}`).style.fontWeight = "";        
     }
 }
 

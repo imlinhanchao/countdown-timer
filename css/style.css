@@ -1,0 +1,66 @@
+@charset "utf-8";
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    color: #000;
+    background-color: #fff;
+    font: 300 1.5em PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    text-align: center;
+}
+
+input, textarea, button {
+    font-size: 100%; 
+    font-family: inherit;
+}
+
+button, input[type=submit], input[type=button], input[type=reset] {
+    font-weight: inherit;
+    cursor: pointer;
+}
+
+.icon-btn {
+    border: 0;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+.icon-btn img{
+    width: 40px;
+    vertical-align: middle;    
+}
+
+.display {
+    font-family: Consolas, "Courier New", Courier,monospace;
+    vertical-align: middle;
+    font-size: 1.2em;
+}
+
+.number {
+    color: #FFF;
+    display: inline-block;
+    background-color: #bd1d27;
+    padding: 5px;
+    margin-right: 5px;
+    width: 30px;
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    font-family: Verdana, Helvetica Neue;
+    font-weight: bold;
+}
+
+.timer {
+    margin: 1.5em 0;
+}
+
+:focus {
+    outline:none;
+}
+
+#offset {
+    width: 3em;
+    text-align: center;
+}

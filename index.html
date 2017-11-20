@@ -5,16 +5,17 @@
     <title>倒计时 </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" href="/img/icon.png" type="image/png">
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel="icon" href="img/icon.png" type="image/png">
+    <link rel='stylesheet' href='css/style.css' />
 </head>
 
 <body>
-    <input type="text" name="" id="offset" value="15" placeholder="分钟">
-    <button onclick="appendTimer(parseInt(document.getElementById('offset').value) * 60)">添加一个timer</button>
+    <input type="number" name="" id="offset" value="15" placeholder="分钟">
+    <button onclick="appendTimer(parseInt(document.getElementById('offset').value) * 60)" class="icon-btn">
+        <img src="img/icon.png" style="width:45px"/>
+    </button>
     <div id="timer_list">
-        
+
     </div>
     <script src="js/do.js"></script>
 </body>
