@@ -28,7 +28,7 @@ function appendTimer(offset, addMin = 5) {
     <button class="icon-btn" id="add_${index}" onclick="addTime(${index}, 60 * ${addMin})" title="加${addMin}分">
         <img src="img/add.png" />
     </button>
-    <input type="text" id="stage_${index}" style="width:50px; border:2px #000 dashed;" placeholder="关卡"/>
+    <input type="number" id="stage_${index}" style="width:50px; border:2px #000 dashed;" placeholder="关卡"/>
     <audio class="hide" id="music_${index}" src="img/warning.mp3" loop/>
     `;
     document.getElementById('timer_list').appendChild(timer_div);
