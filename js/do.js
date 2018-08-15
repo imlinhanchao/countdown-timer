@@ -22,14 +22,13 @@ function appendTimer(offset, addMin = 5) {
     timer_div.id = `timer_${index}`;
     timer_div.innerHTML = `
     <button class="number" ondblclick="remove(${index})">${number+1}</button>
-    <button class="icon-btn" id="begin_${index}" onclick="begin(${index}, ${offset})"><img src="img/play.png" /></button>
-    <button class="icon-btn" id="stop_${index}" onclick="stop(${index})"><img src="img/stop.png" /></button>
+    <button class="icon-btn" id="begin_${index}" onclick="begin(${index}, ${offset})"><img src="res/play.png" /></button>
+    <button class="icon-btn" id="stop_${index}" onclick="stop(${index})"><img src="res/stop.png" /></button>
     <span class="display" id="display_${index}">${zero(parseInt(offset / 60), 2)}:${zero(offset % 60, 2)}.000</span>
     <button class="icon-btn" id="add_${index}" onclick="addTime(${index}, 60 * ${addMin})" title="加${addMin}分">
-        <img src="img/add.png" />
+        <img src="res/add.png" />
     </button>
-    <input type="number" id="stage_${index}" style="width:50px; border:2px #000 dashed;" placeholder="关卡"/>
-    <audio class="hide" id="music_${index}" src="img/warning.mp3" loop/>
+    <audio class="hide" id="music_${index}" src="res/warning.mp3" loop/>
     `;
     document.getElementById('timer_list').appendChild(timer_div);
     document.getElementById(`stop_${index}`).style.display = "none";
